@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<h1>Welcome To Books Application</h1>
+This application is used to demo Django.
+<p></p>
+Here are major topics :
+<ul>
+    {% for t in topics %}
+    <li>{{t | upper }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
