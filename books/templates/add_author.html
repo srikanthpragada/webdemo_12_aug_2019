@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Author</title>
+</head>
+<body>
+<h2>Add Author</h2>
+
+<form method="post">
+    {% csrf_token %}
+    Name <br/>
+    <input type="text" name="aname" size="30" />
+    <p></p>
+    Email Address <br/>
+    <input type="text" name="email" size="30" />
+    <p></p>
+    Phone Number <br/>
+    <input type="text" name="phone" size="30" />
+    <p></p>
+    <input type="submit" value="Add Author"/>
+</form>
+
+<h4>{{message}}</h4>
+
+</body>
+</html>
