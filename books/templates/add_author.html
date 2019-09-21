@@ -10,13 +10,13 @@
 <form method="post">
     {% csrf_token %}
     Name <br/>
-    <input type="text" name="aname" size="30" />
+    <input type="text" name="aname" size="30" value="{{aname}}" />
     <p></p>
     Email Address <br/>
-    <input type="text" name="email" size="30" />
+    <input type="text" name="email" size="30" value="{{email}}" />
     <p></p>
     Phone Number <br/>
-    <input type="text" name="phone" size="30" />
+    <input type="text" name="phone" size="30" value="{{phone}}" />
     <p></p>
     <input type="submit" value="Add Author"/>
 </form>

@@ -8,4 +8,5 @@ urlpatterns = [
     path("welcome/", views.welcome),
     path("countries/", views.list_countries),
     path("addauthor/", views.add_author),
+    path("updateauthor/", views.update_author),
 ]

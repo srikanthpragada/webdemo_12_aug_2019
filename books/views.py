@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import UpdateAuthorForm
 import requests
 import sqlite3
 from django.http import HttpResponse
@@ -7,6 +8,26 @@ from django.http import HttpResponse
 def welcome(request):
     topics = ['Template', 'Forms', 'ORM', 'Rest API']
     return render(request, 'welcome.html', {'topics': topics})
+
+
+def update_author(request):
+    if request.method == "GET":
+        f = UpdateAuthorForm()
+        return render(request, 'update_author.html', {'form': f})
+    else:
+        f = UpdateAuthorForm(request.POST) # copy data from HTML fields to form
+        if f.is_valid():
+            id = f.cleaned_data['id']
+            email = f.cleaned_data['email']
+            print(id,email)
+            # update database
+            message = "Updated author successfully!"
+        else:
+            message = "Sorry! Invalid data. Please resubmit with valid data!"
+
+        return render(request, 'update_author.html',
+                      {'form': f, 'message' : message})
+
 
 
 def add_author(request):
@@ -28,7 +49,13 @@ def add_author(request):
         except Exception as ex:
             print(ex)
             return render(request, 'add_author.html',
-                          {'message': 'Sorry! Could not add author'})
+                          {
+                              'message': 'Sorry! Could not add author. Please correct and resubmit!',
+                              'aname': name,
+                              'email': email,
+                              'phone': phone
+                          }
+                          )
         finally:
             if con is not None:
                 con.close()
