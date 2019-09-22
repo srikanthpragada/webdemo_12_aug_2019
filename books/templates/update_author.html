@@ -9,9 +9,11 @@
 
 <form method="post">
     {% csrf_token %}
-    <table>
-      {{form}}
-    </table>
+    Author Id <br/>
+    {{form.id}}
+    <p></p>
+    Email Address <br/>
+    {{form.email}} {{form.email.errors.0}}
     <p></p>
     <input type="submit" value="Update Author"/>
 </form>

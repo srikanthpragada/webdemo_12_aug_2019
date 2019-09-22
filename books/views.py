@@ -19,11 +19,26 @@ def update_author(request):
         if f.is_valid():
             id = f.cleaned_data['id']
             email = f.cleaned_data['email']
-            print(id,email)
             # update database
-            message = "Updated author successfully!"
+            con = None
+            try:
+                con = sqlite3.connect(r"e:\classroom\python\aug12\catalog.db")
+                cur = con.cursor()
+                cur.execute("update authors set email = ? where id = ?",
+                            (email,id))
+                if cur.rowcount == 1:
+                   message  = "Updated Successfully!"
+                   con.commit()
+                else:
+                   message = "Invalid Author Id!"
+            except Exception as ex:
+                message = "Could not update author due to error!"
+            finally:
+                if con is not None:
+                    con.close()
+
         else:
-            message = "Sorry! Invalid data. Please resubmit with valid data!"
+            message =""   #"Sorry! Invalid data. Please resubmit with valid data!"
 
         return render(request, 'update_author.html',
                       {'form': f, 'message' : message})
