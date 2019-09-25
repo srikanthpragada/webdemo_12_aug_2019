@@ -1,0 +1,11 @@
+{% extends "books_master.html" %}
+{% block content %}
+
+<h2>Books Summary</h2>
+
+<table cellpadding="5pt" border="1">
+    <tr><td>No. of books  : </td><td style="text-align:right">{{details.count}}</td>
+    <tr><td>Average price of books :  </td><td style="text-align:right">{{details.average | floatformat:0}}</td>
+</table>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+body {
+   font-family : verdana;
+}
+
+h2 {
+  color : red;
+}
+
+.tablehead {
+  background-color:black;
+  color:white;
+  font-weight : bold;
+}
+
+.banner {
+  background-color : blue;
+  color:white;
+  font-family : calibre;
+  font-weight:bold;
+  font-size:30pt;
+  letter-spacing : 5pt;
+}
+
+.menu {
+  background-color : #eeeeee;
+  font-weight:bold;
+}

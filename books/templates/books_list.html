@@ -1,0 +1,29 @@
+{% extends "books_master.html" %}
+{% block content %}
+
+<h2>List of Books</h2>
+
+<table  cellpadding="5pt" border="1" style="width:100%">
+    <tr class="tablehead">
+        <th>Title</th>
+        <th>Publisher</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+
+    {% for book in books %}
+
+    <tr>
+        <td>{{book.title}}</td>
+        <td>{{book.publisher}}</td>
+        <td style="text-align:right">{{book.price}}</td>
+        <td style="text-align:center">
+            <a href="/books/edit/{{book.id}}">Edit</a>
+            <a href="/books/delete/{{book.id}}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
