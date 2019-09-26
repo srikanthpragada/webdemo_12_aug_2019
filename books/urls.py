@@ -11,4 +11,8 @@ urlpatterns = [
     path("updateauthor/", views.update_author),
     path("home/", books_views.books_home),
     path("list/", books_views.books_list),
+    path("add/", books_views.books_add),
+    path("delete/<int:id>", books_views.books_delete),
+    path("edit/<int:id>", books_views.books_edit),
 ]
+
