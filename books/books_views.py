@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import Book
 from django.db.models import Avg, Count
 from .forms import BookForm
+import datetime
 
 
 def books_home(request):
@@ -11,14 +12,21 @@ def books_home(request):
 
 
 def books_search(request):
-    return render(request,'books_search.html')
+    # Check whether there is any cookie with name title
+    if 'title' in request.COOKIES:
+        title = request.COOKIES['title']
+    else:
+        title = ''
+    return render(request,'books_search.html',{ 'title' : title})
 
 def books_search_books(request):
     title = request.GET['title']
     books = Book.objects.filter(title__contains=title)
     books = list(books.values())  # Convert Book to dict and then QuerySet to list
-    return JsonResponse(books, safe=False)
-
+    response =  JsonResponse(books, safe=False)
+    response.set_cookie("title",title,
+               expires=datetime.datetime.now() + datetime.timedelta(days=10))
+    return response
 
 def books_list(request):
     books = Book.objects.all()

@@ -5,16 +5,22 @@
 <script>
     function getBooks()
     {
-      $.get("/books/search?title=" + $("#title").val(), null, showBooks);
+      $.get("/books/searchbooks?title=" + $("#title").val(), null, showBooks);
     }
     function showBooks(books) {
-
+       st = ""
+       for(i = 0; i < books.length; i ++)
+       {
+           b = books[i]
+           st += "<li>" + b.title + "," + b.price + "</li>";
+       }
+       $("#books").html(st)
     }
 </script>
 <h2>Search Books</h2>
 
-Title : <input type="text" id="title"/>
-<button>Search</button>
+Title : <input type="text" id="title" value="{{title}}"/>
+<button onclick="getBooks()">Search</button>
 
 <ul id="books">
 
