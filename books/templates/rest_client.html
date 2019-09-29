@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rest Client</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        URL = "/books/rest/"
+        function getBooks()
+        {
+           $.getJSON(URL,null,showBooks);
+        }
+
+        function showBooks(books)
+        {
+           // Show books in the form of bullets
+           titles = "";
+           for(i = 0; i < books.length; i ++)
+           {
+               titles = titles + "<li>" + books[i].id +  " - " + books[i].title + " - " +
+                    books[i].price + "</li>";
+           }
+           $("#books").html(titles);
+        }
+
+        function addBook()
+        {
+          $.ajax(
+             { "url": URL,
+               "data": {
+                       "title" : $("#title").val(),
+                       "publisher" : $("#publisher").val(),
+                       "price" : $("#price").val()
+                     },
+               "type" : "post",
+               "success" : add_success,
+               "error" : add_error
+             }
+         ); // ajax()
+
+        }
+
+        function add_success()
+        {
+            alert("Book has been added successfully!");
+        }
+
+        function add_error(xhr,status,error)
+        {
+            alert("Book could not be added due to some error -> " + error);
+        }
+
+        function deleteBook()
+        {
+          $.ajax(
+             { "url": URL +  $("#id").val() ,
+               "type" : "DELETE",
+               "success" : function() {
+                              alert("Deleted book successfully!")
+                           },
+               "error" : function() {
+                              alert("Could not delete book!")
+                         }
+             }
+         ); // ajax()
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+<h1>Rest Client</h1>
+<button onclick="getBooks()">Get All Books</button>
+<ul id="books">
+
+</ul>
+<hr/>
+<h2>Add Book</h2>
+Title : <input type="text" id="title"/>
+Publisher  : <input type="text" id="publisher"/>
+Price : <input type="number" id="price"/>
+<button onclick="addBook()">Add Book</button>
+<hr/>
+<h2>Delete Book</h2>
+Id : <input type="text" id="id"/>
+<button onclick="deleteBook()">Delete Book</button>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path
-from . import views, books_views, ajax_views
+from . import views, books_views, ajax_views , rest_views
 
 urlpatterns = [
     path("index/", views.welcome),
@@ -18,6 +18,9 @@ urlpatterns = [
     path("searchbooks/",books_views.books_search_books),
     path("ajax/", ajax_views.ajax_demo),
     path("now/", ajax_views.get_date_time),
+    path("rest/", rest_views.process_books),
+    path("rest/<int:id>", rest_views.process_book),
+    path("rest/client", rest_views.client),
 
 ]
 
